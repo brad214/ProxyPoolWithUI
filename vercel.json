@@ -2,20 +2,21 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/api.py", 
+      "src": "main.py",
       "use": "@vercel/python",
       "config": {
-        "runtime": "python3.9"   
+        "maxLambdaSize": "50mb"
       }
     }
   ],
   "routes": [
     {
-      "handle": "filesystem"
-    },
-    {
       "src": "/(.*)",
-      "dest": "api/api.py" 
+      "dest": "main.py"
     }
-  ]
+  ],
+  "env": {
+    "FLASK_ENV": "production",
+    "DB_TYPE": "redis"
+  }
 }
